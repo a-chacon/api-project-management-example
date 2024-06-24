@@ -1,5 +1,5 @@
 class RolesController < ApplicationController
-  before_action :set_role, only: %i[ show update destroy ]
+  before_action :set_role, only: %i[show update destroy]
 
   # GET /roles
   def index
@@ -39,13 +39,14 @@ class RolesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_role
-      @role = Role.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def role_params
-      params.require(:role).permit(:role, :user_id, :project_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_role
+    @role = Role.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def role_params
+    params.require(:role).permit(:role, :user_id, :project_id)
+  end
 end
