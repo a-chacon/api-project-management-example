@@ -5,12 +5,12 @@ class RolesController < ApplicationController
   def index
     @roles = Role.all
 
-    render json: @roles
+    render json: RoleBlueprint.render_as_json(@roles)
   end
 
   # GET /roles/1
   def show
-    render json: @role
+    render json: RoleBlueprint.render_as_json(@role)
   end
 
   # POST /roles
@@ -18,7 +18,7 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
 
     if @role.save
-      render json: @role, status: :created, location: @role
+      render json: RoleBlueprint.render_as_json(@role), status: :created, location: @role
     else
       render json: @role.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class RolesController < ApplicationController
   # PATCH/PUT /roles/1
   def update
     if @role.update(role_params)
-      render json: @role
+      render json: RoleBlueprint.render_as_json(@role)
     else
       render json: @role.errors, status: :unprocessable_entity
     end

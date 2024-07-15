@@ -5,12 +5,12 @@ class ProjectsController < ApplicationController
   def index
     @projects = Project.all
 
-    render json: @projects
+    render json: ProjectBlueprint.render_as_json(@projects)
   end
 
   # GET /projects/1
   def show
-    render json: @project
+    render json: ProjectBlueprint.render_as_json(@project)
   end
 
   # POST /projects
@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
 
     if @project.save
-      render json: @project, status: :created, location: @project
+      render json: ProjectBlueprint.render_as_json(@project), status: :created, location: @project
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   def update
     if @project.update(project_params)
-      render json: @project
+      render json: ProjectBlueprint.render_as_json(@project)
     else
       render json: @project.errors, status: :unprocessable_entity
     end
