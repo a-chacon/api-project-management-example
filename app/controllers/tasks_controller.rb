@@ -17,6 +17,8 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
+    authorize @task
+
     if @task.save
       render json: TaskBlueprint.render_as_json(@task), status: :created, location: @task
     else
